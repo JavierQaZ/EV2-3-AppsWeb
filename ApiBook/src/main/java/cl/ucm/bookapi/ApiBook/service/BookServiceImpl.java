@@ -28,7 +28,7 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public List<BookDtoOut> getBooksByType(String type) {
-        List<BookEntity> books = bookRepository.findByType(type);
+        List<BookEntity> books = bookRepository.findByTypeIgnoreCase(type);
         return mapToDtoList(books);
     }
 
@@ -55,6 +55,14 @@ public class BookServiceImpl implements BookService{
             dto.setAuthor(book.getAuthor());
             dto.setTitle(book.getTitle());
             dto.setType(book.getType());
+
+            if (book.getImage64() != null) {
+                byte[] imageBytes = new byte[book.getImage64().length];
+                for (int i = 0; i < book.getImage64().length; i++) {
+                    imageBytes[i] = book.getImage64()[i];
+                }
+                dto.setImage64(java.util.Base64.getEncoder().encodeToString(imageBytes));
+            }
 
             boolean hasAvailable = copyBookRepository
                     .findByBookFkAndStateTrue(book.getId())

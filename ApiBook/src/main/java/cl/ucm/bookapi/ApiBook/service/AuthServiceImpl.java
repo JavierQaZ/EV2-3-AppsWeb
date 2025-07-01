@@ -43,9 +43,10 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(user);
 
         // Asignar rol "Lector"
-        RolEntity lectorRol = rolRepository.findByName("Lector")
-                .orElseThrow(() -> new RuntimeException("Rol Lector no encontrado"));
+        RolEntity lectorRol = rolRepository.findByName("LECTOR")
+                .orElseThrow(() -> new RuntimeException("Rol LECTOR no encontrado"));
 
+        // Asignar el rol al usuario
         UserRolEntity userRol = new UserRolEntity();
         userRol.setUserFk(user.getEmail());
         userRol.setRolFk(lectorRol.getId());

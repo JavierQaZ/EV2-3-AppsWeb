@@ -10,5 +10,6 @@ public class BookDtoOut {
     private String author;
     private String title;
     private String type;
+    private String image64;
     private Boolean available;
 }

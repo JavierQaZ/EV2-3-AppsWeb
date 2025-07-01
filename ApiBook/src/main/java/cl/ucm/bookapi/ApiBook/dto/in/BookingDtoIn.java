@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BookingDtoIn {
-    private String email;
+    private String userFk;
     private Integer copybookFk;
 }

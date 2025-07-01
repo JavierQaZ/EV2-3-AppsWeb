@@ -36,12 +36,12 @@ public class BookingServiceImpl implements BookingService{
 
     @Override
     public BookingDtoOut createBooking(BookingDtoIn dto) {
-        UserEntity user = userRepository.findById(dto.getEmail())
+        UserEntity user = userRepository.findById(dto.getUserFk())
                 .orElseThrow(() -> new RuntimeException("Usuario no Encontrado"));
 
         if (!user.getState()) throw new RuntimeException("Usuario Bloqueado");
 
-        long activos = bookingRepository.findByUserFk(dto.getEmail())
+        long activos = bookingRepository.findByUserFk(dto.getUserFk())
                 .stream().filter(BookingEntity::getState).count();
         if (activos >= 3) throw new RuntimeException("Máximo de 3 préstamos activos");
 
@@ -51,7 +51,7 @@ public class BookingServiceImpl implements BookingService{
         if (!copy.getState()) throw new RuntimeException("Copia no disponible");
 
         BookingEntity booking = new BookingEntity();
-        booking.setUserFk(dto.getEmail());
+        booking.setUserFk(dto.getUserFk());
         booking.setCopybookFk(dto.getCopybookFk());
         booking.setDateBooking(LocalDate.now());
         booking.setDateReturn(LocalDate.now().plusDays(5));
