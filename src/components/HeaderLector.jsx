@@ -4,9 +4,27 @@ import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
 const HeaderLector = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
     const handleLogout = () => {
-        navigate('/');
+        try {
+            // Limpiar todos los datos de autenticación del localStorage
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('tokenData');
+            localStorage.removeItem('userData');
+
+            console.log('Sesión cerrada exitosamente');
+
+            // Redirigir al login
+            navigate('/', { replace: true });
+
+        } catch (error) {
+            console.error('Error al cerrar sesión:', error);
+            // Aún así redirigir al login
+            navigate('/', { replace: true });
+        }
     };
 
     return (
@@ -27,12 +45,17 @@ const HeaderLector = () => {
                         <a href="/lector/multas" className="nav-link">Mis Multas</a>
                     </div>
                     <div className="nav-item">
-                        <a onClick={handleLogout} className="nav-link">Salir</a>
+                        <a
+                            onClick={handleLogout}
+                            className="nav-link"
+                        >
+                            Salir
+                        </a>
                     </div>
                 </nav>
             </div>
         </header>
-    )
-}
+    );
+};
 
 export default HeaderLector;

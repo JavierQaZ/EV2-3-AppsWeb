@@ -17,22 +17,47 @@ export const authService = {
 
                 // Intentar obtener mensaje de error del servidor
                 try {
-                    const errorData = await response.json();
-                    if (errorData.message) {
-                        errorMessage = errorData.message;
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        const errorData = await response.json();
+                        if (errorData.message) {
+                            errorMessage = errorData.message;
+                        }
+                    } else {
+                        // Si es texto plano
+                        const textError = await response.text();
+                        if (textError) {
+                            errorMessage = textError;
+                        }
                     }
                 } catch (e) {
-                    // Si no se puede parsear el JSON del error, usar el mensaje por defecto
+                    // Si no se puede parsear, usar el mensaje por defecto
+                    console.error('Error al parsear respuesta de error:', e);
                 }
 
                 throw new Error(errorMessage);
             }
 
-            const data = await response.json();
+            // Manejar respuesta exitosa
+            const contentType = response.headers.get('content-type');
+            let data;
+
+            if (contentType && contentType.includes('application/json')) {
+                // Si es JSON
+                data = await response.json();
+            } else {
+                // Si es texto plano
+                const textResponse = await response.text();
+                data = {
+                    message: textResponse,
+                    success: true
+                };
+            }
+
             return data;
         } catch (error) {
-            console.error('Error al crear usuario:', error);
-            throw new Error(`Error al crear usuario: ${error.message}`);
+            console.error('Error al registrar usuario:', error);
+            throw new Error(`Error al registrar usuario: ${error.message}`);
         }
     },
 
@@ -52,22 +77,47 @@ export const authService = {
 
                 // Intentar obtener mensaje de error del servidor
                 try {
-                    const errorData = await response.json();
-                    if (errorData.message) {
-                        errorMessage = errorData.message;
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        const errorData = await response.json();
+                        if (errorData.message) {
+                            errorMessage = errorData.message;
+                        }
+                    } else {
+                        // Si es texto plano
+                        const textError = await response.text();
+                        if (textError) {
+                            errorMessage = textError;
+                        }
                     }
                 } catch (e) {
-                    // Si no se puede parsear el JSON del error, usar el mensaje por defecto
+                    // Si no se puede parsear, usar el mensaje por defecto
+                    console.error('Error al parsear respuesta de error:', e);
                 }
 
                 throw new Error(errorMessage);
             }
 
-            const data = await response.json();
+            // Manejar respuesta exitosa
+            const contentType = response.headers.get('content-type');
+            let data;
+
+            if (contentType && contentType.includes('application/json')) {
+                // Si es JSON
+                data = await response.json();
+            } else {
+                // Si es texto plano
+                const textResponse = await response.text();
+                data = {
+                    message: textResponse,
+                    success: true
+                };
+            }
+
             return data;
         } catch (error) {
-            console.error('Error al crear usuario:', error);
-            throw new Error(`Error al crear usuario: ${error.message}`);
+            console.error('Error al iniciar sesión:', error);
+            throw new Error(`Error al iniciar sesión: ${error.message}`);
         }
     }
 }
