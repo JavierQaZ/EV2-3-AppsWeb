@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+.about-container {
+    background-color: #090909;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.dev-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: nowrap;
+    margin-bottom: 40px;
+}
+
+.volver-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.volver-link {
+    color: white;
+    text-decoration: underline;
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.volver-link:hover {
+    color: #ae00ff;
+    text-decoration: underline;
+}
+
+.volver-link:focus {
+    outline: 2px solid #ae00ff;
+    outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dev-container {
+        gap: 20px;
+    }
+
+    .volver-link {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .volver-link {
+        font-size: 14px;
+    }
+}

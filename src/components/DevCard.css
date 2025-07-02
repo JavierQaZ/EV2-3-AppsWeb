@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+* {
+    font-family: "DM Sans", sans-serif;
+    box-sizing: border-box;
+}
+
+
+
+@keyframes showCard {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dev-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px #ae00ff;
+    width: 100%;
+    max-width: 400px;
+    padding: 30px 20px;
+    text-align: center;
+    animation: showCard 2s ease-in;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dev-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px #ae00ff;
+}
+
+.dev-card:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.dev-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.dev-card p {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 18px;
+    font-style: italic;
+    margin: 0;
+}
+
+.icon {
+    background-color: #ffffff;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    color: #240046;
+    fill: #240046;
+}
+
+.dev-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #fff;
+    box-shadow: 0 5px 15px #ae00ff;
+    background-color: #ffffff;
+}
+
+.dev-card h1 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    color: #240046;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.repo-link {
+    display: inline-flex;
+    align-items: center;
+    background-color: #240046;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.repo-link:hover {
+    background-color: #000000;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+.repo-link:focus {
+    outline: 2px solid #ae00ff;
+    outline-offset: 2px;
+}
+
+.icon-text {
+    background-color: #ffffff;
+    padding: 8px 0;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dev-card {
+        max-width: 350px;
+        padding: 25px 15px;
+    }
+
+    .dev-card h1 {
+        font-size: 24px;
+    }
+
+    .dev-card p {
+        font-size: 16px;
+    }
+
+    .dev-image {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .dev-card {
+        animation: none;
+    }
+
+    .dev-card:hover {
+        transform: none;
+    }
+
+    .repo-link:hover {
+        transform: none;
+    }
+}
+
+/* Estados de enfoque mejorados */
+.dev-card:focus-within {
+    outline: 2px solid #ae00ff;
+    outline-offset: 2px;
+}

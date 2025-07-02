@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import './LoginForm.css';
+import './RegisterForm.css';
 import logoRojoMuniTalca from '../assets/logoRojoMuniTalca.png'
 
-const LoginForm = () => {
+const RegisterForm = () => {
     const navigate = useNavigate();
 
-    const handleRegisterClick = () => {
-        navigate('/register');
+    const handleLoginClick = () => {
+        navigate('/login');
     };
 
     return (
@@ -21,10 +21,28 @@ const LoginForm = () => {
                     />
                 </div>
                 <div className="title-section">
-                    <h2 className="login-title">Iniciar Sesión</h2>
+                    <h2 className="login-title">Registro</h2>
                 </div>
                 <hr className="title-line" />
                 <form className="login-form">
+                    <div className="form-group">
+                        <label className="login-form-label" htmlFor="name">Nombre</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            className="form-control"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label className="login-form-label" htmlFor="last-name">Apellido</label>
+                        <input
+                            type="text"
+                            id="last-name"
+                            name="last-name"
+                            className="form-control"
+                        />
+                    </div>
                     <div className="form-group">
                         <label className="login-form-label" htmlFor="email">Correo Electrónico</label>
                         <input
@@ -54,13 +72,13 @@ const LoginForm = () => {
                 <br/>
                 <hr className="title-line" />
                 <div className="register-section">
-                    <p className="register-text">¿No tienes cuenta?</p>
+                    <p className="register-text">¿Ya tienes cuenta?</p>
                     <button
                         type="button"
                         className="login-button"
-                        onClick={handleRegisterClick}
+                        onClick={handleLoginClick}
                     >
-                        Regístrate
+                        Inicia Sesión
                     </button>
                 </div>
             </div>
@@ -68,4 +86,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm;
+export default RegisterForm;
