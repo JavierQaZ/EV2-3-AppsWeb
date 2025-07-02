@@ -12,6 +12,10 @@ import SearchResultsLector from './components/SearchResultsLector'
 
 import HomeAdmin from './views/Administrador/HomeAdmin'
 import SearchResultsAdmin from './components/SearchResultsAdmin'
+import NuevoLibro from './views/Administrador/NuevoLibro'
+import Prestamo from './views/Administrador/Préstamo'
+import Devolucion from './views/Administrador/Devolucion'
+import Lector from './views/Administrador/Lector'
 
 function App() {
     return (
@@ -34,6 +38,10 @@ function App() {
                     {/* Admin */}
                     <Route path="/admin/home" element={<HomeAdmin/>}/>
                     <Route path="/admin/search" element={<SearchResultsAdmin/>}/>
+                    <Route path="/admin/nuevo-libro" element={<NuevoLibro/>}/>
+                    <Route path="/admin/prestamo" element={<Prestamo/>}/>
+                    <Route path="/admin/devolucion" element={<Devolucion/>}/>
+                    <Route path="/admin/lector" element={<Lector/>}/>
                 </Routes>
             </div>
         </Router>
