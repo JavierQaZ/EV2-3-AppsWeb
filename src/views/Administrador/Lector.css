@@ -1,0 +1,361 @@
+.lector-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.titulo-principal {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Sección de búsqueda */
+.seccion-busqueda {
+    margin-bottom: 30px;
+}
+
+.grupo-busqueda {
+    display: flex;
+    gap: 10px;
+    max-width: 500px;
+}
+
+.input-busqueda {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.input-busqueda:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.boton-buscar {
+    padding: 10px 20px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.boton-buscar:hover {
+    background-color: #1976D2;
+}
+
+.boton-buscar:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Sección de resultados */
+.seccion-resultados {
+    margin-top: 40px;
+}
+
+/* Container de las tres tablas */
+.tablas-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Estilos para cada tabla */
+.tabla-seccion {
+    border: 2px solid #333;
+    border-radius: 8px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.titulo-tabla {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-contenido {
+    padding: 20px;
+    min-height: 200px;
+}
+
+/* Datos del lector */
+.fila-dato {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.fila-dato:last-child {
+    border-bottom: none;
+}
+
+.etiqueta {
+    font-weight: bold;
+    color: #555;
+}
+
+.valor {
+    color: #333;
+}
+
+/* Tablas de datos (reservas y multas) */
+.tabla-datos {
+    width: 100%;
+}
+
+.tabla-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 2px solid #ddd;
+    font-weight: bold;
+    color: #555;
+    font-size: 12px;
+}
+
+.tabla-fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+}
+
+.tabla-fila:last-child {
+    border-bottom: none;
+}
+
+.tabla-fila span {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Estados */
+.estado {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    align-self: center;
+}
+
+.estado.activa {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+}
+
+.estado.vencida {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.estado.pendiente {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+
+.sin-datos {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin: 20px 0;
+}
+
+/* Sección de estado del lector */
+.estado-lector-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    max-width: 500px;
+}
+
+.estado-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.estado-label {
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+}
+
+.estado-valor {
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.estado-valor.Activo {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+}
+
+.estado-valor.Bloqueado {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.boton-bloqueo {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.boton-bloqueo.Bloquear {
+    background-color: #f44336;
+    color: white;
+}
+
+.boton-bloqueo.Bloquear:hover {
+    background-color: #d32f2f;
+}
+
+.boton-bloqueo.Desbloquear {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.boton-bloqueo.Desbloquear:hover {
+    background-color: #45a049;
+}
+
+/* Mensajes */
+.mensaje {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid;
+    animation: slideIn 0.3s ease-out;
+}
+
+.mensaje-error {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border-left-color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.mensaje-error::before {
+    content: "⚠️";
+    font-size: 16px;
+}
+
+.mensaje-exito {
+    background-color: #f0fdf4;
+    color: #16a34a;
+    border-left-color: #16a34a;
+    border: 1px solid #bbf7d0;
+}
+
+.mensaje-exito::before {
+    content: "✅";
+    font-size: 16px;
+}
+
+.mensaje-info {
+    background-color: #eff6ff;
+    color: #2563eb;
+    border-left-color: #2563eb;
+    border: 1px solid #bfdbfe;
+}
+
+.mensaje-info::before {
+    content: "ℹ️";
+    font-size: 16px;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+    .tablas-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .tabla-header,
+    .tabla-fila {
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+    }
+
+    .tabla-header span:nth-child(n+3),
+    .tabla-fila span:nth-child(n+3) {
+        grid-column: 1 / -1;
+        margin-top: 5px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 768px) {
+    .grupo-busqueda {
+        flex-direction: column;
+        max-width: 100%;
+    }
+
+    .estado-lector-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .tabla-header,
+    .tabla-fila {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .fila-dato {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+}

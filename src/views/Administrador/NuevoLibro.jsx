@@ -31,7 +31,6 @@ const NuevoLibro = () => {
         const input = document.createElement('input');
         input.type = 'file';
         input.accept = 'image/*';
-        
         input.onchange = (e) => {
             const archivo = e.target.files[0];
             if (archivo) {
@@ -40,15 +39,7 @@ const NuevoLibro = () => {
                     setMensaje('Por favor selecciona un archivo de imagen válido');
                     return;
                 }
-                
-                // Validar tamaño (máximo 5MB)
-                if (archivo.size > 5 * 1024 * 1024) {
-                    setMensaje('El archivo es demasiado grande. Máximo 5MB');
-                    return;
-                }
-                
                 setNombreArchivo(archivo.name);
-                
                 // Convertir a Base64
                 const reader = new FileReader();
                 reader.onload = (event) => {
@@ -66,7 +57,6 @@ const NuevoLibro = () => {
                 reader.readAsDataURL(archivo);
             }
         };
-        
         input.click();
     };
 
@@ -77,7 +67,6 @@ const NuevoLibro = () => {
             ...prev,
             [name]: value
         }));
-        
         // Si cambian manualmente el campo imagen, limpiar el nombre del archivo
         if (name === 'imagen') {
             setNombreArchivo('');
@@ -93,7 +82,6 @@ const NuevoLibro = () => {
 
         setCargandoBusqueda(true);
         setMensaje('');
-        
         try {
             const resultado = await bookService.findBookByTitle(busqueda);
             // La API devuelve un array de libros
@@ -113,7 +101,6 @@ const NuevoLibro = () => {
     // Crear nuevo libro
     const handleCrearLibro = async (e) => {
         e.preventDefault();
-        
         if (!nuevoLibro.titulo || !nuevoLibro.autor || !nuevoLibro.tipo) {
             setMensaje('Por favor completa todos los campos obligatorios');
             return;
@@ -172,12 +159,10 @@ const NuevoLibro = () => {
             <HeaderAdmin />
             <div className="nuevo-libro-container">
                 <h1 className="titulo-principal">Libro / Copia</h1>
-                
                 <div className="contenido-principal">
                     {/* Sección Nuevo Libro */}
                     <div className="seccion-nuevo-libro">
                         <h2 className="titulo-seccion">Nuevo Libro</h2>
-                        
                         <form onSubmit={handleCrearLibro}>
                             <div className="formulario-grupo">
                                 <input
@@ -250,7 +235,6 @@ const NuevoLibro = () => {
                     {/* Sección Nueva Copia */}
                     <div className="seccion-nueva-copia">
                         <h2 className="titulo-seccion">Nueva Copia</h2>
-                        
                         <div className="grupo-busqueda">
                             <input
                                 type="text"
@@ -304,8 +288,7 @@ const NuevoLibro = () => {
                 {mensaje && (
                     <div className={`mensaje ${
                         mensaje.toLowerCase().includes('error') ? 'mensaje-error' :
-                        mensaje.toLowerCase().includes('exitosamente') || mensaje.toLowerCase().includes('creado') ? 'mensaje-exito' : 
-                        'mensaje-info'
+                        mensaje.toLowerCase().includes('exitosamente') || mensaje.toLowerCase().includes('creado') ? 'mensaje-exito' : 'mensaje-info'
                     }`}>
                         {mensaje}
                     </div>

@@ -29,7 +29,7 @@ export const bookService = {
 
             return '';
         } catch (error) {
-            console.error('Error creating book:', error);
+            console.error('Error creando libro:', error);
             throw error;
         }
     },
@@ -51,7 +51,7 @@ export const bookService = {
 
             return await response.json();
         } catch (error) {
-            console.error('Error finding book:', error);
+            console.error('Error encontrando libro:', error);
             throw error;
         }
     },
@@ -82,7 +82,7 @@ export const bookService = {
 
             return '';
         } catch (error) {
-            console.error('Error creating book copy:', error);
+            console.error('Error creando copia de libro:', error);
             throw error;
         }
     }
