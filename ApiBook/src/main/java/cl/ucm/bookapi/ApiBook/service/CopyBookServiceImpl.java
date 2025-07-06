@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CopyBookServiceImpl implements CopyBookService{
@@ -36,7 +37,9 @@ public class CopyBookServiceImpl implements CopyBookService{
         List<BookEntity> books = bookRepository.findByTitleContainingIgnoreCase(title);
         if (books.isEmpty()) return List.of();
 
-        Integer bookId = books.get(0).getId();
-        return bookCopyRepository.findByBookFkAndStateTrue(bookId);
+        return books.stream()
+                .flatMap(book -> bookCopyRepository
+                        .findByBookFkAndStateTrue(book.getId()).stream())
+                .collect(Collectors.toList());
     }
 }

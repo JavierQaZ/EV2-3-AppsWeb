@@ -35,32 +35,6 @@ public class ReaderServiceImpl implements ReaderService{
         dto.setName(user.getName());
         dto.setLastName(user.getLastName());
         dto.setState(user.getState());
-
-        dto.setBookings(
-                bookingRepository.findByUserFk(email).stream()
-                        .map(b -> {
-                            BookingDtoOut out = new BookingDtoOut();
-                            out.setId(b.getId());
-                            out.setEmail(b.getUserFk());
-                            out.setCopybookFk(b.getCopybookFk());
-                            out.setDateBooking(b.getDateBooking());
-                            out.setDateReturn(b.getDateReturn());
-                            out.setState(b.getState());
-                            return out;
-                        }).collect(Collectors.toList())
-        );
-
-        dto.setFines(
-                fineRepository.findByUserFk(email).stream()
-                        .map(f -> {
-                            FineDtoOut out = new FineDtoOut();
-                            out.setId(f.getId());
-                            out.setAmount(f.getAmount());
-                            out.setDescription(f.getDescription());
-                            out.setState(f.getState());
-                            return out;
-                        }).collect(Collectors.toList())
-        );
         return dto;
     }
 

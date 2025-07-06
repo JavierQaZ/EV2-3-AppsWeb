@@ -14,4 +14,9 @@ public class BookingDtoOut {
     private LocalDate dateBooking;
     private LocalDate dateReturn;
     private Boolean state;
+
+    private String title;
+    private String author;
+    private String type;
+    private String image64;
 }

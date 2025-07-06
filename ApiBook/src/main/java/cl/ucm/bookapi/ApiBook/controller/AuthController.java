@@ -30,6 +30,7 @@ public class AuthController {
     @PostMapping("/login")
     public String login(@RequestBody LoginDto dto) {
         UserEntity user = authService.login(dto);
-        return jwtUtil.generateToken(user.getEmail());
+        String rol = authService.getRolNameByEmail(user.getEmail());
+        return jwtUtil.generateToken(user.getEmail(), rol);
     }
 }

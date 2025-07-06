@@ -65,4 +65,11 @@ public class AuthServiceImpl implements AuthService {
 
         return user;
     }
+
+    @Override
+    public String getRolNameByEmail(String email) {
+        UserRolEntity userRol = userRolRepository.findFirstByUserFk(email)
+                .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+        return userRol.getRolEntity().getName();
+    }
 }

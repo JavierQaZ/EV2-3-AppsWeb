@@ -3,10 +3,7 @@ package cl.ucm.bookapi.ApiBook.service;
 import cl.ucm.bookapi.ApiBook.dto.in.BookingDtoIn;
 import cl.ucm.bookapi.ApiBook.dto.in.ReturnDto;
 import cl.ucm.bookapi.ApiBook.dto.out.BookingDtoOut;
-import cl.ucm.bookapi.ApiBook.entities.BookingEntity;
-import cl.ucm.bookapi.ApiBook.entities.CopyBookEntity;
-import cl.ucm.bookapi.ApiBook.entities.FineEntity;
-import cl.ucm.bookapi.ApiBook.entities.UserEntity;
+import cl.ucm.bookapi.ApiBook.entities.*;
 import cl.ucm.bookapi.ApiBook.repository.BookingRepository;
 import cl.ucm.bookapi.ApiBook.repository.CopyBookRepository;
 import cl.ucm.bookapi.ApiBook.repository.FineRepository;
@@ -16,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,11 +55,12 @@ public class BookingServiceImpl implements BookingService{
         booking.setDateReturn(LocalDate.now().plusDays(5));
         booking.setState(true);
         bookingRepository.save(booking);
+        booking = bookingRepository.findById(booking.getId()).orElseThrow();
 
         copy.setState(false);
         copyBookRepository.save(copy);
 
-        return toDto(booking);
+        return toDtoWithBook(booking);
     }
 
     @Override
@@ -83,9 +82,13 @@ public class BookingServiceImpl implements BookingService{
             long diasAtraso = ChronoUnit.DAYS.between(booking.getDateReturn(), dto.getDateReturn());
             int multa = (int) diasAtraso * 1000;
 
+            String titulo = "Libro desconocido";
+            if (copy.getBookEntity() != null && copy.getBookEntity().getTitle() != null) {
+                titulo = copy.getBookEntity().getTitle();
+            }
             FineEntity fine = new FineEntity();
             fine.setAmount(multa);
-            fine.setDescription("Multa por atraso - Préstamo ID: " + booking.getId());
+            fine.setDescription("Multa por atraso - Libro: " + titulo);
             fine.setUserFk(booking.getUserFk());
             fine.setState(true);
             fineRepository.save(fine);
@@ -100,7 +103,8 @@ public class BookingServiceImpl implements BookingService{
     @Override
     public List<BookingDtoOut> getBookingByUser(String email) {
         return bookingRepository.findByUserFk(email).stream()
-                .map(this::toDto)
+                .filter(BookingEntity::getState)
+                .map(this::toDtoWithBook)
                 .collect(Collectors.toList());
     }
 
@@ -112,6 +116,33 @@ public class BookingServiceImpl implements BookingService{
         dto.setDateBooking(b.getDateBooking());
         dto.setDateReturn(b.getDateReturn());
         dto.setState(b.getState());
+        return dto;
+    }
+
+    private BookingDtoOut toDtoWithBook(BookingEntity b) {
+        BookingDtoOut dto = new BookingDtoOut();
+        dto.setId(b.getId());
+        dto.setCopybookFk(b.getCopybookFk());
+        dto.setEmail(b.getUserFk());
+        dto.setDateBooking(b.getDateBooking());
+        dto.setDateReturn(b.getDateReturn());
+        dto.setState(b.getState());
+
+        copyBookRepository.findById(b.getCopybookFk()).ifPresent(copy -> {
+            BookEntity book = copy.getBookEntity();
+            dto.setTitle(book.getTitle());
+            dto.setAuthor(book.getAuthor());
+            dto.setType(book.getType());
+
+            if (book.getImage64() != null) {
+                byte[] bytes = new byte[book.getImage64().length];
+                for (int i = 0; i < book.getImage64().length; i++) {
+                    bytes[i] = book.getImage64()[i];
+                }
+                String base64 = java.util.Base64.getEncoder().encodeToString(bytes);
+                dto.setImage64("data:image/jpeg;base64," + base64);
+            }
+        });
         return dto;
     }
 }

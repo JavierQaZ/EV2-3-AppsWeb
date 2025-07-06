@@ -7,4 +7,5 @@ import cl.ucm.bookapi.ApiBook.entities.UserEntity;
 public interface AuthService {
     void register(RegisterDto dto);
     UserEntity login(LoginDto dto);
+    String getRolNameByEmail(String email);
 }

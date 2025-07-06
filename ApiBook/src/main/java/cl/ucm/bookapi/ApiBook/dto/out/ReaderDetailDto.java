@@ -12,6 +12,4 @@ public class ReaderDetailDto {
     private String name;
     private String lastName;
     private Boolean state;
-    private List<BookingDtoOut> bookings;
-    private List<FineDtoOut> fines;
 }
