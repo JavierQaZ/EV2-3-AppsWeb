@@ -16,6 +16,8 @@ import NuevoLibro from './views/Administrador/NuevoLibro'
 import Prestamo from './views/Administrador/Prestamo'
 import Devolucion from './views/Administrador/Devolucion'
 import Lector from './views/Administrador/Lector'
+import PrestamosLector from './views/Lector/PrestamosLector'
+import MultasLector from './views/Lector/MultasLector'
 
 function App() {
     return (
@@ -31,8 +33,8 @@ function App() {
 
                     {/* Lector */}
                     <Route path="/lector/home" element={<HomeLector/>}/>
-                    <Route path="/lector/prestamos" element={<HomeLector/>}/>
-                    <Route path="/lector/multas" element={<HomeLector/>}/>
+                    <Route path="/lector/prestamos" element={<PrestamosLector/>}/>
+                    <Route path="/lector/multas" element={<MultasLector/>}/>
                     <Route path="/lector/search" element={<SearchResultsLector/>}/>
 
                     {/* Admin */}

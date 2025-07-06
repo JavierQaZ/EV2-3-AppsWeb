@@ -8,16 +8,10 @@ const BookCard = ({ book }) => {
         }
 
         try {
-            // Si ya tiene el formato data:image, lo devolvemos tal como está
             if (base64String.startsWith('data:image')) {
                 return base64String;
             }
-
-            // Si es una cadena base64 pura (como la que viene del REST), 
-            // agregamos el prefijo data:image
-            // Por defecto asumimos JPEG, pero podrías detectar el tipo si es necesario
             return `data:image/jpeg;base64,${base64String}`;
-
         } catch (error) {
             console.error('Error al procesar la imagen base64:', error);
             return "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
